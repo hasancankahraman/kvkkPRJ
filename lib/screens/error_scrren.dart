@@ -193,7 +193,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Error'),
+        title: Text('Bil Bakalım Bu Ne'),
       ),
       body: Center(
         child: Column(

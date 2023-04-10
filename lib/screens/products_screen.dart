@@ -275,113 +275,92 @@ class _ProductsScreenState extends State<ProductsScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Veri İhlali'),
+        title: Text('Veri İhlali Duyuruları'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Veri İhlali Başlık'),
-              onChanged: (value) => title = value,
-            ),
-            SizedBox(height: 16),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Veri İhlali İçerik'),
-              onChanged: (value) => content = value,
-            ),
-            SizedBox(height: 16),
-            Center(
+      body: Column(
+        children: [
+          ElevatedButton(
+            onPressed: () {
+              getFromServer();
+            },
+            child: Text('Veri İhlali Duyuruları'),
+          ),
+          SizedBox(height: 16), // Ara boşluk ekleyin
+          ElevatedButton(
+            onPressed: () {
+              getFavoriteProducts();
+            },
+            child: Text('Yalnız İlgili Olduğunuz Konuları Göster'),
+          ),
+          SizedBox(height: 16),
+          ElevatedButton(
+            onPressed: () {
+              getAllProducts();
+            },
+            child: Text('Hepsini Göster'),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {
-                      getFromServer();
-                    },
-                    child: Text('Yeni Veri İhlali Bildirimi Ekle'),
-                  ),
-                  SizedBox(height: 16), // Ara boşluk ekleyin
-                  ElevatedButton(
-                    onPressed: () {
-                      getFavoriteProducts();
-                    },
-                    child: Text('Yalnız İlgili Olduğunuz Konuları Göster'),
-                  ),
-                  SizedBox(height: 16),
-                  ElevatedButton(
-                    onPressed: () {
-                      getAllProducts();
-                    },
-                    child: Text('Hepsini Göster'),
-                  ),
-                ],
-              ),
-            ),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: dbProducts
-                        .map(
-                          (e) => Container(
-                            padding: EdgeInsets.all(15),
-                            margin: EdgeInsets.all(5),
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: Colors.grey, width: 2),
-                            ),
-                            //color: Colors.black
-                            child: Column(
-                              children: [
-                                Image.network(e.imgUrl!),
-                                Text("${e.id}   ${e.title}"),
-                                Text("${e.description}"),
-                                Text("Yaklaşık ${e.price} Kişi"),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: ElevatedButton(
-                                          onPressed: () {
-                                            switchFavorite(e);
-                                          },
-                                          child: e.favorite
-                                              ? Text('İlgimi Çekmiyor')
-                                              : Text('İlgiliyim')),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(9.0),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          //addProduct();
-                                        },
-                                        child: Icon(Icons.edit),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          deleteProduct(e.id);
-                                        },
-                                        child: Icon(Icons.delete),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            ),
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: dbProducts
+                      .map(
+                        (e) => Container(
+                          padding: EdgeInsets.all(15),
+                          margin: EdgeInsets.all(5),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(15),
+                            border: Border.all(color: Colors.grey, width: 2),
                           ),
-                        )
-                        .toList()),
-              ),
+                          //color: Colors.black
+                          child: Column(
+                            children: [
+                              Image.network(e.imgUrl!),
+                              Text("${e.id}   ${e.title}"),
+                              Text("${e.description}"),
+                              Text("Yaklaşık ${e.price} Kişi"),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(9.0),
+                                    child: ElevatedButton(
+                                        onPressed: () {
+                                          switchFavorite(e);
+                                        },
+                                        child: e.favorite
+                                            ? Text('İlgimi Çekmiyor')
+                                            : Text('İlgiliyim')),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(9.0),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        //addProduct();
+                                      },
+                                      child: Icon(Icons.edit),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                      onPressed: () {
+                                        deleteProduct(e.id);
+                                      },
+                                      child: Icon(Icons.delete),
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      )
+                      .toList()),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
