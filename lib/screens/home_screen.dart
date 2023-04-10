@@ -1,5 +1,3 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_constructors
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -10,9 +8,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('KVKK'),
+        title: const Text('KVKK'),
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           onPressed: () {
             Scaffold.of(context).openDrawer();
           },
@@ -22,158 +20,75 @@ class HomeScreen extends StatelessWidget {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            DrawerHeader(
+            const DrawerHeader(
               child: Text('Menü'),
               decoration: BoxDecoration(
                 color: Colors.red,
               ),
             ),
-            ListTile(
-              title: Text('Haberler'),
-              onTap: () {
-                GoRouter.of(context).push('/news');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Veri Ekle'),
-              onTap: () {
-                GoRouter.of(context).push('/products');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Kullanıcı Ekle'),
-              onTap: () {
-                GoRouter.of(context).push('/users');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Hakkımızda'),
-              onTap: () {
-                GoRouter.of(context).push('/about');
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Sakın Bakma'),
-              onTap: () {
-                GoRouter.of(context).push('/error');
-                Navigator.pop(context);
-              },
-            ),
+            _buildListTile(context, 'Haberler', '/news'),
+            _buildListTile(context, 'Veri Ekle', '/products'),
+            _buildListTile(context, 'Kullanıcı Ekle', '/users'),
+            _buildListTile(context, 'Hakkımızda', '/about'),
+            _buildListTile(context, 'Sakın Bakma', '/error'),
           ],
         ),
       ),
       body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/news');
-                  },
-                  child: Text('Haberler'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/products');
-                  },
-                  child: Text('Veri ekle'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/users');
-                  },
-                  child: Text('Kullanıcı Ekle'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/about');
-                  },
-                  child: Text('Hakkımızda'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black),
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: ElevatedButton(
-                  onPressed: () {
-                    GoRouter.of(context).push('/error');
-                  },
-                  child: Text('Sakın Bakmaa :)'),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-            ],
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 16),
+                _buildElevatedButton(context, 'Haberler', '/news'),
+                const SizedBox(height: 16),
+                _buildElevatedButton(context, 'Veri ekle', '/products'),
+                const SizedBox(height: 16),
+                _buildElevatedButton(context, 'Kullanıcı Ekle', '/users'),
+                const SizedBox(height: 16),
+                _buildElevatedButton(context, 'Hakkımızda', '/about'),
+                const SizedBox(height: 16),
+                _buildElevatedButton(context, 'Sakın Bakmaa :)', '/error'),
+                const SizedBox(height: 16),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  static Widget _buildListTile(
+      BuildContext context, String title, String route) {
+    return ListTile(
+      title: Text(title),
+      onTap: () {
+        GoRouter.of(context).push(route);
+        Navigator.pop(context);
+      },
+    );
+  }
+
+  static Widget _buildElevatedButton(
+      BuildContext context, String label, String route) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: ElevatedButton(
+        onPressed: () {
+          GoRouter.of(context).push(route);
+        },
+        child: Text(label),
+        style: ElevatedButton.styleFrom(
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          minimumSize: const Size(double.infinity, 50),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
           ),
         ),
       ),
