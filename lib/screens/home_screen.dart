@@ -21,10 +21,10 @@ class HomeScreen extends StatelessWidget {
           padding: EdgeInsets.zero,
           children: [
             const DrawerHeader(
-              child: Text('Menü'),
               decoration: BoxDecoration(
                 color: Colors.red,
               ),
+              child: Text('Menü'),
             ),
             _buildListTile(context, 'Haberler', '/news'),
             _buildListTile(context, 'Veri Ekle', '/products'),
@@ -83,7 +83,6 @@ class HomeScreen extends StatelessWidget {
         onPressed: () {
           GoRouter.of(context).push(route);
         },
-        child: Text(label),
         style: ElevatedButton.styleFrom(
           padding: const EdgeInsets.symmetric(vertical: 16),
           minimumSize: const Size(double.infinity, 50),
@@ -91,6 +90,7 @@ class HomeScreen extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
         ),
+        child: Text(label),
       ),
     );
   }
