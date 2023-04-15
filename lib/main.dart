@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'screens/about_scrren.dart';
+import 'screens/chart_screen.dart';
 import 'screens/error_scrren.dart';
 import 'screens/home_screen.dart';
 
@@ -42,6 +43,10 @@ final _routes = GoRouter(
     GoRoute(
       path: '/products',
       builder: (context, state) => ProductsScreen(),
+    ),
+    GoRoute(
+      path: '/data',
+      builder: (context, state) => ChartScreen(),
     ),
   ],
 );
