@@ -4,6 +4,7 @@ import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ErrorScreen extends StatefulWidget {
   const ErrorScreen({Key? key}) : super(key: key);
@@ -14,6 +15,27 @@ class ErrorScreen extends StatefulWidget {
 
 class _ErrorScreenState extends State<ErrorScreen> {
   String deviceInformation = "Süprizzz dene bakalımm";
+  String connvectivity = "  Hangi Cihaz ile Bağlısın";
+
+  connectivityInfo() async {
+    final connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult == ConnectivityResult.mobile) {
+      connvectivity = "Mobile";
+    } else if (connectivityResult == ConnectivityResult.wifi) {
+      connvectivity = "WiFi";
+    } else if (connectivityResult == ConnectivityResult.bluetooth) {
+      connvectivity = "bluetooth";
+    } else if (connectivityResult == ConnectivityResult.ethernet) {
+      connvectivity = "ethernet";
+    } else if (connectivityResult == ConnectivityResult.none) {
+      connvectivity = "none";
+    } else if (connectivityResult == ConnectivityResult.other) {
+      connvectivity = "other";
+    } else if (connectivityResult == ConnectivityResult.vpn) {
+      connvectivity = "vpn";
+    }
+    setState(() {});
+  }
 
   deviceInfo() async {
     DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -193,7 +215,7 @@ class _ErrorScreenState extends State<ErrorScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bil Bakalım Bu Ne'),
+        title: Text('Cihaz Bilgileri'),
       ),
       body: Center(
         child: Column(
@@ -207,6 +229,11 @@ class _ErrorScreenState extends State<ErrorScreen> {
                   deviceInfo();
                 },
                 child: Text(deviceInformation)),
+            InkWell(
+                onTap: () {
+                  connectivityInfo();
+                },
+                child: Text(connvectivity)),
           ],
         ),
       ),

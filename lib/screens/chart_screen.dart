@@ -28,11 +28,11 @@ class _ChartScreenState extends State<ChartScreen> {
   String chart_type = "line";
 
   var hacksData = <HackData>[
-    HackData('04/03', 35000),
-    HackData('04/02', 28000),
-    HackData('04/01', 34000),
-    HackData('03/31', 32000),
-    HackData('03/30', 40000)
+    HackData('04/01', 15000),
+    HackData('04/02', 19000),
+    HackData('04/03', 21000),
+    HackData('04/04', 10000),
+    HackData('04/05', 27000),
   ];
 
   @override
@@ -50,21 +50,21 @@ class _ChartScreenState extends State<ChartScreen> {
                   chart_type = 'line';
                   setState(() {});
                 },
-                child: Text('Line'),
+                child: Text('Aylık'),
               ),
               ElevatedButton(
                 onPressed: () {
                   chart_type = 'spline';
                   setState(() {});
                 },
-                child: Text('Spline'),
+                child: Text('Ortalama'),
               ),
               ElevatedButton(
                 onPressed: () {
                   chart_type = 'pie';
                   setState(() {});
                 },
-                child: Text('Pie'),
+                child: Text('Tür'),
               ),
             ],
           ),
@@ -92,8 +92,7 @@ class PieChart extends StatelessWidget {
     DataType("Kişisel Bilgiler", 45000, Colors.brown),
     DataType("İletişim Bilgileri", 30000, Colors.blue),
     DataType("Hesap Bilgileri", 45000, Colors.orange),
-    DataType("Diğer Bilgiler", 25000, Colors.green),
-    DataType("Haftalık Sex Skoru", 10000, Colors.pink),
+    DataType("Diğer Bilgiler", 25000, Colors.green)
   ];
 
   @override
@@ -150,11 +149,11 @@ class LineChart extends StatelessWidget {
           //dataLabelSettings: DataLabelSettings(isVisible: true),
           // Bind data source
           dataSource: <HackData>[
-            HackData('04/03', 10000),
-            HackData('04/02', 17000),
-            HackData('04/01', 11000),
-            HackData('03/31', 13000),
-            HackData('03/30', 5000)
+            HackData('04/01', 20000),
+            HackData('04/02', 16000),
+            HackData('04/03', 14000),
+            HackData('04/04', 25000),
+            HackData('04/05', 8000)
           ],
           xValueMapper: (HackData hack, _) => hack.date,
           yValueMapper: (HackData hack, _) => hack.amount,
@@ -176,28 +175,23 @@ class SplineChart extends StatelessWidget {
   Widget build(BuildContext context) {
     return SfCartesianChart(
       primaryXAxis: CategoryAxis(),
+      title: ChartTitle(
+        text: 'Türkiye\de Aylık Ortalama Hacklenen Veri Sayısı',
+        alignment: ChartAlignment.center,
+      ),
       legend: Legend(isVisible: true),
       tooltipBehavior: TooltipBehavior(enable: true),
       series: <ChartSeries>[
         // Renders spline chart
         SplineSeries<HackData, String>(
-            dataSource: data,
-            markerSettings: MarkerSettings(isVisible: true),
-            name: 'Hacklenen Firmalar',
-            // Type of spline
-            splineType: SplineType.natural,
-            //dashArray: <double>[10, 10],
-            xValueMapper: (HackData data, _) => data.date,
-            yValueMapper: (HackData data, _) => data.amount),
-        SplineSeries<HackData, String>(
-            name: 'Güvenli Firmalar',
+            name: 'Aylık Ortalama Veri Sayısı',
             markerSettings: MarkerSettings(isVisible: true),
             dataSource: [
-              HackData('04/03', 10000),
-              HackData('04/02', 17000),
-              HackData('04/01', 11000),
-              HackData('03/31', 13000),
-              HackData('03/30', 5000)
+              HackData('04/01', 10000),
+              HackData('04/02', 13000),
+              HackData('04/03', 9800),
+              HackData('04/04', 17000),
+              HackData('04/05', 11000)
             ],
             // Type of spline
             splineType: SplineType.natural,
