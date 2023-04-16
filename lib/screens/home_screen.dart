@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -44,6 +45,25 @@ class HomeScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+                const SizedBox(height: 16),
+                InkWell(
+                  onTap: () {
+                    launch('https://www.youtube.com/watch?v=MI_OGdN5Rpw');
+                  },
+                  child: Column(
+                    children: [
+                      Image.network(
+                        'https://cdn.discordapp.com/attachments/1094776786681876712/1097229207878242435/kvkk.png',
+                        height: 120,
+                        width: 400,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                ),
                 const SizedBox(height: 16),
                 _buildElevatedButton(context, 'Veri Ekle', '/news'),
                 const SizedBox(height: 16),
